@@ -10,7 +10,6 @@ import showMemoEditorDialog from "@/components/MemoEditor/MemoEditorDialog";
 import MemoView from "@/components/MemoView";
 import MobileHeader from "@/components/MobileHeader";
 import { TimelineSidebar, TimelineSidebarDrawer } from "@/components/TimelineSidebar";
-import { memoServiceClient } from "@/grpcweb";
 import { DAILY_TIMESTAMP, DEFAULT_LIST_MEMOS_PAGE_SIZE } from "@/helpers/consts";
 import { getTimeStampByDate } from "@/helpers/datetime";
 import useCurrentUser from "@/hooks/useCurrentUser";
