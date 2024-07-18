@@ -105,6 +105,12 @@
     "delete-confirm": "您确定要删除此 Memo 吗？（此操作不可逆）",
     "delete-memo": "删除 Memo",
     "embed": "嵌入",
+    "embeds": {
+      "copy": "复制",
+      "only-public-supported": "* 仅支持公开备忘录。",
+      "text": "将以下代码复制并粘贴到您的博客或网站中。",
+      "title": "嵌入备忘录"
+    },
     "fetch-more": "点击获取更多",
     "fetching-data": "正在获取数据…",
     "links": "链接",

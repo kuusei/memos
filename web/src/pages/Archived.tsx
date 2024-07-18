@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import Empty from "@/components/Empty";
 import Icon from "@/components/Icon";
 import MemoContent from "@/components/MemoContent";
+import MemoResourceListView from "@/components/MemoResourceListView";
 import MobileHeader from "@/components/MobileHeader";
 import SearchBar from "@/components/SearchBar";
 import { DEFAULT_LIST_MEMOS_PAGE_SIZE } from "@/helpers/consts";
@@ -117,6 +118,7 @@ const Archived = () => {
                 </div>
               </div>
               <MemoContent key={`${memo.name}-${memo.displayTime}`} memoName={memo.name} nodes={memo.nodes} readonly={true} />
+              <MemoResourceListView resources={memo.resources} />
             </div>
           ))}
           {isRequesting ? (

@@ -1,6 +1,5 @@
 import { Dropdown, Menu, MenuButton, MenuItem } from "@mui/joy";
 import clsx from "clsx";
-import copy from "copy-to-clipboard";
 import toast from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 import Icon from "@/components/Icon";
@@ -10,6 +9,7 @@ import { RowStatus } from "@/types/proto/api/v1/common";
 import { Memo } from "@/types/proto/api/v1/memo_service";
 import { useTranslate } from "@/utils/i18n";
 import showMemoEditorDialog from "./MemoEditor/MemoEditorDialog";
+import showShareMemoDialog from "./ShareMemoDialog";
 
 interface Props {
   memo: Memo;
@@ -95,11 +95,6 @@ const MemoActionMenu = (props: Props) => {
     }
   };
 
-  const handleCopyLink = () => {
-    copy(`${window.location.origin}/m/${memo.uid}`);
-    toast.success(t("message.succeed-copy-link"));
-  };
-
   const handleDeleteMemoClick = async () => {
     const confirmed = window.confirm(t("memo.delete-confirm"));
     if (confirmed) {
@@ -132,9 +127,9 @@ const MemoActionMenu = (props: Props) => {
           </MenuItem>
         )}
         {!hiddenActions?.includes("share") && (
-          <MenuItem onClick={handleCopyLink}>
-            <Icon.Copy className="w-4 h-auto" />
-            {t("memo.copy-link")}
+          <MenuItem onClick={() => showShareMemoDialog(memo)}>
+            <Icon.Share className="w-4 h-auto" />
+            {t("common.share")}
           </MenuItem>
         )}
         <MenuItem color="warning" onClick={handleToggleMemoStatusClick}>

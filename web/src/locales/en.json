@@ -104,6 +104,12 @@
     "delete-confirm": "Are you sure you want to delete this memo? THIS ACTION IS IRREVERSIBLE",
     "delete-memo": "Delete Memo",
     "embed": "Embed",
+    "embeds": {
+      "title": "Embed Memo",
+      "text": "Copy and paste the below code into your blog or website.",
+      "only-public-supported": "* Only public memos can be embedded.",
+      "copy": "Copy"
+    },
     "fetch-more": "Click to fetch more",
     "fetching-data": "Fetching data…",
     "no-archived-memos": "No archived memos.",
