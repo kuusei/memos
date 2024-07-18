@@ -147,5 +147,6 @@ export default function showPreviewImageDialog(imgUrls: string[] | string, initi
       imgUrls: Array.isArray(imgUrls) ? imgUrls : [imgUrls],
       initialIndex: initialIndex || 0,
     },
+    true
   );
 }

@@ -68,6 +68,7 @@ export function generateDialog<T extends DialogProps>(
   config: DialogConfig,
   DialogComponent: React.FC<T>,
   props?: Omit<T, "destroy">,
+  withoutCommonContext = true,
 ): DialogCallback {
   const tempDiv = document.createElement("div");
   const dialog = createRoot(tempDiv);
@@ -90,11 +91,17 @@ export function generateDialog<T extends DialogProps>(
   const Fragment = (
     <Provider store={store}>
       <CssVarsProvider theme={theme}>
-        <CommonContextProvider>
+        {withoutCommonContext ? (
           <BaseDialog destroy={cbs.destroy} clickSpaceDestroy={true} {...config}>
             <DialogComponent {...dialogProps} />
           </BaseDialog>
-        </CommonContextProvider>
+        ) : (
+          <CommonContextProvider>
+            <BaseDialog destroy={cbs.destroy} clickSpaceDestroy={true} {...config}>
+              <DialogComponent {...dialogProps} />
+            </BaseDialog>
+          </CommonContextProvider>
+        )}
       </CssVarsProvider>
     </Provider>
   );
