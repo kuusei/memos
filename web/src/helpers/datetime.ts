@@ -1,6 +1,10 @@
 import i18n from "@/i18n";
 
 export function getTimeStampByDate(t: Date | number | string | any): number {
+  // localize date
+  if (typeof t === "string" && /\d{4}-\d{1,2}-\d{1,2}/.test(t)) {
+    return new Date(`${t} 00:00:00`).getTime();
+  }
   return new Date(t).getTime();
 }
 
