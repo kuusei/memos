@@ -14,6 +14,18 @@ A privacy-first, lightweight note-taking service. Easily capture and share your 
 
 ![demo](https://www.usememos.com/demo.png)
 
+## fork 信息
+本 fork 主要用于补充和微调一些页面样式, 基本不修改后端代码
+- 目前调整的样式
+  - 恢复首页热力图显示, 改进热力图组件功能[支持filter传递和搜索, 重载ui/切换页面都不丢失筛选信息]
+  - 关闭 Timeline/Profile 入口[未关闭实际功能, 但可能有不兼容]
+  - 恢复旧版本分享功能, 可以生成图片/embed/url
+  - Archived 页面显示图片
+- 目前修复的功能
+  - 修复时间筛选时, 由于字符串问题导致本地时间错误的问题
+  - 点击弹窗需要加载多个接口问题
+  - 修复旧版本分享功能生成图片时出现被下载图片在页面闪烁问题
+
 ## Key points
 
 - **Open source and free to use**. Embrace a future where creativity knows no boundaries with our open-source solution. All features are free to use and will never be charged in any form or content.
