@@ -5,17 +5,21 @@ import { useFilterStore } from "@/store/module";
 const useFilterWithUrlParams = () => {
   const location = useLocation();
   const filterStore = useFilterStore();
-  const { tag, text, memoPropertyFilter } = filterStore.state;
+  const { tag, text, selectedDateString, memoPropertyFilter } = filterStore.state;
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const tag = urlParams.get("tag");
     const text = urlParams.get("text");
+    const selectedDateString = urlParams.get("selectedDate");
     if (tag) {
       filterStore.setTagFilter(tag);
     }
     if (text) {
       filterStore.setTextFilter(text);
+    }
+    if (selectedDateString) {
+      filterStore.setSelectedDateString(selectedDateString);
     }
   }, []);
 
@@ -31,13 +35,19 @@ const useFilterWithUrlParams = () => {
     } else {
       urlParams.delete("text");
     }
+    if (selectedDateString) {
+      urlParams.set("selectedDate", selectedDateString);
+    } else {
+      urlParams.delete("selectedDate");
+    }
     const params = urlParams.toString();
     window.history.replaceState({}, "", `${location.pathname}${params?.length > 0 ? `?${params}` : ""}`);
-  }, [tag, text]);
+  }, [tag, text, selectedDateString]);
 
   return {
     tag,
     text,
+    selectedDateString,
     memoPropertyFilter,
   };
 };

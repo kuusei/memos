@@ -17,6 +17,7 @@ export const useFilterStore = () => {
           text: undefined,
           visibility: undefined,
           memoPropertyFilter: undefined,
+          selectedDateString: undefined,
         }),
       );
     },
@@ -45,6 +46,13 @@ export const useFilterStore = () => {
       store.dispatch(
         setMemoPropertyFilter({
           ...memoPropertyFilter,
+        }),
+      );
+    },
+    setSelectedDateString: (selectedDateString?: string) => {
+      store.dispatch(
+        setFilter({
+          selectedDateString: selectedDateString,
         }),
       );
     },

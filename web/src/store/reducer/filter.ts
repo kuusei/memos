@@ -6,6 +6,7 @@ interface State {
   text?: string;
   visibility?: Visibility;
   memoPropertyFilter?: MemoPropertyFilter;
+  selectedDateString?: string;
 }
 
 export interface MemoPropertyFilter {

@@ -8,7 +8,7 @@ import Icon from "@/components/Icon";
 import MemoEditor from "@/components/MemoEditor";
 import MemoView from "@/components/MemoView";
 import MobileHeader from "@/components/MobileHeader";
-import { DEFAULT_LIST_MEMOS_PAGE_SIZE } from "@/helpers/consts";
+import { DAILY_TIMESTAMP, DEFAULT_LIST_MEMOS_PAGE_SIZE } from "@/helpers/consts";
 import { getTimeStampByDate } from "@/helpers/datetime";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useFilterWithUrlParams from "@/hooks/useFilterWithUrlParams";
@@ -40,7 +40,7 @@ const Home = () => {
   useEffect(() => {
     memoList.reset();
     fetchMemos("");
-  }, [filter.tag, filter.text, filter.memoPropertyFilter]);
+  }, [filter.tag, filter.text, filter.selectedDateString, filter.memoPropertyFilter]);
 
   const fetchMemos = async (nextPageToken: string) => {
     setIsRequesting(true);
@@ -54,6 +54,12 @@ const Home = () => {
     }
     if (filter.tag) {
       filters.push(`tag == "${filter.tag}"`);
+    }
+    if (filter.selectedDateString) {
+      const selectedDateStamp = getTimeStampByDate(filter.selectedDateString);
+      filters.push(
+        ...[`display_time_after == ${selectedDateStamp / 1000}`, `display_time_before == ${(selectedDateStamp + DAILY_TIMESTAMP) / 1000}`],
+      );
     }
     if (filter.memoPropertyFilter) {
       if (filter.memoPropertyFilter.hasLink) {
