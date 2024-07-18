@@ -54,12 +54,12 @@ const Navigation = (props: Props) => {
     title: t("common.home"),
     icon: <Icon.Home className="w-6 h-auto opacity-70 shrink-0" />,
   };
-  const timelineNavLink: NavLinkItem = {
-    id: "header-timeline",
-    path: Routes.TIMELINE,
-    title: t("timeline.title"),
-    icon: <Icon.GanttChartSquare className="w-6 h-auto opacity-70 shrink-0" />,
-  };
+  // const timelineNavLink: NavLinkItem = {
+  //   id: "header-timeline",
+  //   path: Routes.TIMELINE,
+  //   title: t("timeline.title"),
+  //   icon: <Icon.GanttChartSquare className="w-6 h-auto opacity-70 shrink-0" />,
+  // };
   const resourcesNavLink: NavLinkItem = {
     id: "header-resources",
     path: Routes.RESOURCES,
@@ -72,12 +72,12 @@ const Navigation = (props: Props) => {
     title: t("common.explore"),
     icon: <Icon.Globe2 className="w-6 h-auto opacity-70 shrink-0" />,
   };
-  const profileNavLink: NavLinkItem = {
-    id: "header-profile",
-    path: user ? `/u/${encodeURIComponent(user.username)}` : "",
-    title: t("common.profile"),
-    icon: <Icon.User2 className="w-6 h-auto opacity-70 shrink-0" />,
-  };
+  // const profileNavLink: NavLinkItem = {
+  //   id: "header-profile",
+  //   path: user ? `/u/${encodeURIComponent(user.username)}` : "",
+  //   title: t("common.profile"),
+  //   icon: <Icon.User2 className="w-6 h-auto opacity-70 shrink-0" />,
+  // };
   const inboxNavLink: NavLinkItem = {
     id: "header-inbox",
     path: Routes.INBOX,
@@ -117,7 +117,7 @@ const Navigation = (props: Props) => {
   };
 
   const navLinks: NavLinkItem[] = user
-    ? [homeNavLink, timelineNavLink, resourcesNavLink, exploreNavLink, profileNavLink, inboxNavLink, archivedNavLink, settingNavLink]
+    ? [homeNavLink, resourcesNavLink, exploreNavLink, inboxNavLink, archivedNavLink, settingNavLink]
     : [exploreNavLink, signInNavLink, aboutNavLink];
 
   return (
