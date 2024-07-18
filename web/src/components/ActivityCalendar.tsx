@@ -1,10 +1,9 @@
 import { Tooltip } from "@mui/joy";
 import clsx from "clsx";
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { memoServiceClient } from "@/grpcweb";
 import { DAILY_TIMESTAMP } from "@/helpers/consts";
-import { getNormalizedDateString, getDateWithOffset } from "@/helpers/datetime";
+import { getNormalizedDateString } from "@/helpers/datetime";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { useFilterStore } from "@/store/module";
 import { useMemoList } from "@/store/v1";
