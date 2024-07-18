@@ -29,7 +29,6 @@ const Timeline = () => {
   const memoList = useMemoList();
   const [, setLastVisited] = useLocalStorage<string>("lastVisited", Routes.TIMELINE);
   const filter = useFilterWithUrlParams();
-  const [activityStats, setActivityStats] = useState<Record<string, number>>({});
   const [selectedDateString, setSelectedDateString] = useState<string>(new Date().toDateString());
   const [isRequesting, setIsRequesting] = useState(true);
   const [nextPageToken, setNextPageToken] = useState<string>("");
@@ -43,26 +42,7 @@ const Timeline = () => {
   useEffect(() => {
     memoList.reset();
     fetchMemos("");
-  }, [selectedDateString, filter.text, filter.tag, filter.memoPropertyFilter]);
-
-  useEffect(() => {
-    (async () => {
-      const filters = [`row_status == "NORMAL"`];
-      const { stats } = await memoServiceClient.getUserMemosStats({
-        name: user.name,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        filter: filters.join(" && "),
-      });
-
-      setActivityStats(
-        Object.fromEntries(
-          Object.entries(stats).filter(([date]) => {
-            return dayjs(date).format("YYYY-MM") === monthString;
-          }),
-        ),
-      );
-    })();
-  }, [sortedMemos.length]);
+  }, [filter.tag, filter.text, filter.selectedDateString, filter.memoPropertyFilter]);
 
   const fetchMemos = async (nextPageToken: string) => {
     setIsRequesting(true);
@@ -77,6 +57,12 @@ const Timeline = () => {
     if (filter.tag) {
       filters.push(`tag == "${filter.tag}"`);
     }
+    if (filter.selectedDateString) {
+      const selectedDateStamp = getTimeStampByDate(filter.selectedDateString);
+      filters.push(
+        ...[`display_time_after == ${selectedDateStamp / 1000}`, `display_time_before == ${(selectedDateStamp + DAILY_TIMESTAMP) / 1000}`],
+      );
+    }
     if (filter.memoPropertyFilter) {
       if (filter.memoPropertyFilter.hasLink) {
         filters.push(`has_link == true`);
@@ -87,12 +73,6 @@ const Timeline = () => {
       if (filter.memoPropertyFilter.hasCode) {
         filters.push(`has_code == true`);
       }
-    }
-    if (selectedDateString) {
-      const selectedDateStamp = getTimeStampByDate(selectedDateString);
-      filters.push(
-        ...[`display_time_after == ${selectedDateStamp / 1000}`, `display_time_before == ${(selectedDateStamp + DAILY_TIMESTAMP) / 1000}`],
-      );
     }
     const response = await memoStore.fetchMemos({
       pageSize: DEFAULT_LIST_MEMOS_PAGE_SIZE,
@@ -156,12 +136,7 @@ const Timeline = () => {
                     </div>
                     <span className="opacity-60 text-lg">{dayjs(monthString).year()}</span>
                   </div>
-                  <ActivityCalendar
-                    month={monthString}
-                    selectedDate={selectedDateString}
-                    data={activityStats}
-                    onClick={(date) => setSelectedDateString(date)}
-                  />
+                  <ActivityCalendar />
                 </div>
 
                 <div className={clsx("w-full flex flex-col justify-start items-start")}>
