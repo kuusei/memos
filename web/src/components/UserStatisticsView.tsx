@@ -29,7 +29,7 @@ const UserStatisticsView = () => {
   const filter = filterStore.state;
 
   useAsyncEffect(async () => {
-    setIsRequesting(true);
+    !memoAmount && setIsRequesting(true);
     const { properties } = await memoServiceClient.listMemoProperties({
       name: `memos/-`,
     });
@@ -78,7 +78,7 @@ const UserStatisticsView = () => {
         <div className="w-full flex justify-between items-center">
           <div className="w-auto flex justify-start items-center">
             <Icon.CalendarDays className="w-4 h-auto mr-1" />
-            <span className="block text-base sm:text-sm">Days</span>
+            <span className="block text-base sm:text-sm">{t("common.days")}</span>
           </div>
           <span>{days}</span>
         </div>

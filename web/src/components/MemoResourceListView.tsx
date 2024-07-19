@@ -34,7 +34,7 @@ const MemoResourceListView = ({ resources = [] }: { resources: Resource[] }) => 
     if (type === "image/*") {
       return (
         <img
-          className="cursor-pointer min-h-full w-auto object-cover"
+          className="cursor-pointer min-h-full w-auto object-cover max-h-[500px]"
           src={url}
           onClick={() => handleImageClick(url)}
           decoding="async"

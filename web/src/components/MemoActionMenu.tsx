@@ -121,13 +121,13 @@ const MemoActionMenu = (props: Props) => {
           </MenuItem>
         )}
         {!hiddenActions?.includes("edit") && (
-          <MenuItem onClick={handleEditMemoClick}>
+          <MenuItem color="primary" onClick={handleEditMemoClick}>
             <Icon.Edit3 className="w-4 h-auto" />
             {t("common.edit")}
           </MenuItem>
         )}
         {!hiddenActions?.includes("share") && (
-          <MenuItem onClick={() => showShareMemoDialog(memo)}>
+          <MenuItem color="success" onClick={() => showShareMemoDialog(memo)}>
             <Icon.Share className="w-4 h-auto" />
             {t("common.share")}
           </MenuItem>

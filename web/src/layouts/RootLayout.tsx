@@ -15,7 +15,7 @@ const RootLayout = () => {
   const { sm } = useResponsiveWidth();
   const currentUser = useCurrentUser();
   const [lastVisited] = useLocalStorage<string>("lastVisited", "/home");
-  const [collapsed, setCollapsed] = useLocalStorage<boolean>("navigation-collapsed", false);
+  const [collapsed, setCollapsed] = useLocalStorage<boolean>("navigation-collapsed", true);
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {

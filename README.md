@@ -22,11 +22,15 @@ A privacy-first, lightweight note-taking service. Easily capture and share your 
   - 关闭 Timeline/Profile 入口[未关闭实际功能, 但可能有不兼容]
   - 恢复旧版本分享功能, 可以生成图片/embed/url
     - 分享时右下角改为显示当前访问域名
-  - Archived 页面显示图片
+  - archived 页面显示图片
+  - 支持 s3 存储 prefixURL 功能
+  - memo action 样式
 - 目前修复的问题
-  - 修复时间筛选时, 由于字符串问题导致本地时间错误的问题
+  - 时间筛选时, 由于字符串问题导致本地时间错误
   - 点击弹窗需要加载多个接口问题
-  - 修复旧版本分享功能生成图片时出现被下载图片在页面闪烁问题
+  - 旧版本分享功能生成图片时出现被下载图片在页面闪烁
+  - 统计 Memos 数量闪烁
+  - 图片显示过高
 
 注意: 如果有需要, 建议自行fork后使用, 短期内会有比较多的更新, stable 分支也不会很稳定
 
