@@ -1,0 +1,9 @@
+{
+  "name": "memos",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "husky": "^8.0.3"
+  }
+}
