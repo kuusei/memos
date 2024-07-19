@@ -121,7 +121,7 @@ const ShareMemoDialog: React.FC<Props> = (props: Props) => {
                   </span>
                 </div>
               </div>
-              <span className="text-gray-500 dark:text-gray-400">via {window.location.origin}</span>
+              <span className="text-gray-500 text-end max-sm:text-sm dark:text-gray-400">via {window.location.origin}</span>
             </div>
           </div>
         </div>

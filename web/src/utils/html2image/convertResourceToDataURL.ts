@@ -5,7 +5,7 @@ const convertResourceToDataURL = async (url: string, useCache = true): Promise<s
     return Promise.resolve(cachedResourceMap.get(url) as string);
   }
 
-  const res = await fetch(url, { mode: "no-cors" });
+  const res = await fetch(url);
   const blob = await res.blob();
 
   return new Promise((resolve) => {
