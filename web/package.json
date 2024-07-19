@@ -6,7 +6,8 @@
     "release": "vite build --mode release --outDir=../server/router/frontend/dist --emptyOutDir",
     "lint": "eslint --ext .js,.ts,.tsx, src",
     "type-check": "tsc --noEmit",
-    "postinstall": "cd ../proto && buf generate"
+    "postinstall": "cd ../proto && buf generate && cd ../web && husky init && git config core.hooksPath web/.husky",
+    "prepare": "husky"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
@@ -26,6 +27,7 @@
     "dompurify": "^3.1.6",
     "fuse.js": "^7.0.0",
     "highlight.js": "^11.10.0",
+    "husky": "^9.1.1",
     "i18next": "^23.11.5",
     "katex": "^0.16.11",
     "lodash-es": "^4.17.21",
