@@ -3,4 +3,5 @@
 
 cd ./web
 pnpm run lint --fix
+pnpm type-check
 pnpm run build

@@ -8,23 +8,31 @@ A privacy-first, lightweight note-taking service. Easily capture and share your 
 <a href="https://demo.usememos.com/">Live Demo</a>
 
 <p>
-  <a href="https://hub.docker.com/r/neosmemo/memos"><img alt="Docker pull" src="https://img.shields.io/docker/pulls/neosmemo/memos.svg"/></a>
-  <a href="https://discord.gg/tfPJa4UmAv"><img alt="Discord" src="https://img.shields.io/badge/discord-chat-5865f2?logo=discord&logoColor=f5f5f5" /></a>
+  <a href="https://hub.docker.com/r/kuusei/memos"><img alt="Docker pull" src="https://img.shields.io/docker/pulls/kuusei/memos.svg"/></a>
 </p>
 
-![demo](https://www.usememos.com/demo.png)
+![demo](./docs/image/demo.png)
 
 ## fork 信息
 本 fork 主要用于补充和微调一些页面样式, 基本不修改后端代码
-- 目前调整的样式
+- 目前调整的功能
   - 恢复首页热力图显示, 改进热力图组件功能[支持filter传递和搜索, 重载ui/切换页面都不丢失筛选信息]
   - 关闭 Timeline/Profile 入口[未关闭实际功能, 但可能有不兼容]
   - 恢复旧版本分享功能, 可以生成图片/embed/url
   - Archived 页面显示图片
-- 目前修复的功能
+- 目前修复的问题
   - 修复时间筛选时, 由于字符串问题导致本地时间错误的问题
   - 点击弹窗需要加载多个接口问题
   - 修复旧版本分享功能生成图片时出现被下载图片在页面闪烁问题
+
+注意: 如果有需要, 建议自行fork后使用, 短期内会有比较多的更新, stable 分支也不会很稳定
+
+## 变更预览
+
+- 恢复首页热力图显示 & 关闭 Timeline/Profile 入口
+![demo](./docs/image/demo.png)
+- 分享功能
+![demo](./docs/image/func-share.png)
 
 ## Key points
 
