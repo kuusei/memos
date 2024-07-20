@@ -8,6 +8,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { useFilterStore } from "@/store/module";
 import { useMemoStore } from "@/store/v1";
 import { useTranslate } from "@/utils/i18n";
+import ActivityCalendar from "./ActivityCalendar";
 import Icon from "./Icon";
 
 interface UserMemoStats {
@@ -74,6 +75,7 @@ const UserStatisticsView = () => {
           </Tooltip>
         </div>
       </div>
+      <ActivityCalendar />
       <div className="w-full grid grid-cols-1 gap-x-4">
         <div className="w-full flex justify-between items-center">
           <div className="w-auto flex justify-start items-center">

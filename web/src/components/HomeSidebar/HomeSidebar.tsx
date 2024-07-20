@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import SearchBar from "@/components/SearchBar";
 import UserStatisticsView from "@/components/UserStatisticsView";
-import ActivityCalendar from "../ActivityCalendar";
 import TagsSection from "./TagsSection";
 
 interface Props {
@@ -17,7 +16,6 @@ const HomeSidebar = (props: Props) => {
       )}
     >
       <SearchBar />
-      <ActivityCalendar />
       <UserStatisticsView />
       <TagsSection />
     </aside>

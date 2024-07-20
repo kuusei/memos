@@ -10,7 +10,7 @@ import { useMemoList } from "@/store/v1";
 import { Translations, useTranslate } from "@/utils/i18n";
 
 const tableConfig = {
-  width: 10,
+  width: 9,
   height: 7,
 };
 
