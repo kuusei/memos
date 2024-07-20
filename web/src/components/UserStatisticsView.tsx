@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { memoServiceClient } from "@/grpcweb";
 import useAsyncEffect from "@/hooks/useAsyncEffect";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import i18n from "@/i18n";
 import { useFilterStore } from "@/store/module";
 import { useMemoStore } from "@/store/v1";
 import { useTranslate } from "@/utils/i18n";
@@ -51,6 +52,7 @@ const UserStatisticsView = () => {
     });
     setMemoStats(memoStats);
     setMemoAmount(properties.length);
+
     setIsRequesting(false);
   }, [memoStore.stateId]);
 
@@ -65,7 +67,9 @@ const UserStatisticsView = () => {
   return (
     <div className="group w-full border mt-2 py-2 px-3 rounded-lg space-y-0.5 text-gray-500 dark:text-gray-400 bg-zinc-50 dark:bg-zinc-900 dark:border-zinc-800">
       <div className="w-full mb-1 flex flex-row justify-between items-center">
-        <p className="text-sm font-medium leading-6 dark:text-gray-500">{t("common.statistics")}</p>
+        <p className="text-sm font-medium leading-6 dark:text-gray-400">
+          {new Date().toLocaleDateString(i18n.language, { month: "long", day: "numeric" })}
+        </p>
         <div className="group-hover:block hidden">
           <Tooltip title={"Refresh"} placement="top">
             <Icon.RefreshCcw
@@ -75,7 +79,9 @@ const UserStatisticsView = () => {
           </Tooltip>
         </div>
       </div>
-      <ActivityCalendar />
+      <div className="w-full pb-2">
+        <ActivityCalendar />
+      </div>
       <div className="w-full grid grid-cols-1 gap-x-4">
         <div className="w-full flex justify-between items-center">
           <div className="w-auto flex justify-start items-center">
