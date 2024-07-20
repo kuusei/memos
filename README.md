@@ -18,13 +18,14 @@ A privacy-first, lightweight note-taking service. Easily capture and share your 
 因此任何修改都没有配置项, 均为直接修改前端功能
 
 - 目前调整的功能
-  - 恢复首页热力图显示, 改进热力图组件功能[支持filter传递和搜索, 重载ui/切换页面都不丢失筛选信息]
-  - 关闭 Timeline/Profile 入口[未关闭实际功能, 但可能有不兼容]
+  - 调整首页热力图显示为类0.18.0版本, 改进热力图组件功能[支持filter传递和搜索, 重载ui/切换页面都不丢失筛选信息]
+  - 关闭 Profile 入口[未关闭实际功能, 但可能有不兼容]
   - 恢复旧版本分享功能, 可以生成图片/embed/url
     - 分享时右下角改为显示当前访问域名
   - archived 页面显示图片
   - 支持 s3 存储 prefixURL 功能
   - memo action 样式
+  - 新增 memo embed 支持
 - 目前修复的问题
   - 时间筛选时, 由于字符串问题导致本地时间错误
   - 点击弹窗需要加载多个接口问题

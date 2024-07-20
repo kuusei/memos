@@ -9,6 +9,7 @@ import Explore from "@/pages/Explore";
 import Home from "@/pages/Home";
 import Inboxes from "@/pages/Inboxes";
 import MemoDetail from "@/pages/MemoDetail";
+import MemoEmbed from "@/pages/MemoEmbed";
 import NotFound from "@/pages/NotFound";
 import PermissionDenied from "@/pages/PermissionDenied";
 import Resources from "@/pages/Resources";
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             element: <AuthCallback />,
           },
         ],
+      },
+      {
+        path: "/m/:uid/embed",
+        element: <MemoEmbed />,
       },
       {
         path: Routes.ROOT,
