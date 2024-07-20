@@ -42,6 +42,12 @@ const UpdateCustomizedProfileDialog: React.FC<Props> = ({ destroy }: Props) => {
     });
   };
 
+  const handleDomainChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPartialState({
+      domain: e.target.value as string,
+    });
+  };
+
   const handleLogoUrlChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPartialState({
       logoUrl: e.target.value as string,
@@ -73,6 +79,7 @@ const UpdateCustomizedProfileDialog: React.FC<Props> = ({ destroy }: Props) => {
       description: "",
       locale: "en",
       appearance: "system",
+      domain: "",
     });
   };
 
@@ -109,6 +116,8 @@ const UpdateCustomizedProfileDialog: React.FC<Props> = ({ destroy }: Props) => {
       <div className="dialog-content-container min-w-[16rem]">
         <p className="text-sm mb-1">{t("setting.system-section.server-name")}</p>
         <Input className="w-full" type="text" value={customProfile.title} onChange={handleNameChanged} />
+        <p className="text-sm mb-1 mt-2">{t("setting.system-section.customize-server.domain")}</p>
+        <Input className="w-full" type="text" value={customProfile.domain} onChange={handleDomainChanged} />
         <p className="text-sm mb-1 mt-2">{t("setting.system-section.customize-server.icon-url")}</p>
         <Input className="w-full" type="text" value={customProfile.logoUrl} onChange={handleLogoUrlChanged} />
         <p className="text-sm mb-1 mt-2">{t("setting.system-section.customize-server.description")}</p>

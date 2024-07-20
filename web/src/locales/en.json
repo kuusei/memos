@@ -289,7 +289,8 @@
         "description": "Description",
         "icon-url": "Icon URL",
         "locale": "Server Locale",
-        "title": "Customize Server"
+        "title": "Customize Server",
+        "domain": "Domain"
       },
       "disable-password-login": "Disable password login",
       "disable-password-login-final-warning": "Please type \"CONFIRM\" if you know what you are doing.",

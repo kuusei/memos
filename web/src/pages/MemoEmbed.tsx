@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import MemoView from "@/components/MemoView";
 import UserAvatar from "@/components/UserAvatar";
 import useNavigateTo from "@/hooks/useNavigateTo";
-import { useMemoStore, useUserStore } from "@/store/v1";
+import { useMemoStore, useUserStore, useWorkspaceSettingStore } from "@/store/v1";
+import { WorkspaceSettingKey } from "@/types/proto/store/workspace_setting";
 
 const MemoEmbed = () => {
   const params = useParams();
@@ -15,7 +16,8 @@ const MemoEmbed = () => {
   const uid = params.uid;
   const memo = memoStore.getMemoByUid(uid || "");
   const [creator, setCreator] = useState(memo?.creator ? userStore.getUserByName(memo?.creator) : undefined);
-  // const loadingState = useLoading();
+  const workspaceSettingStore = useWorkspaceSettingStore();
+  const domain = workspaceSettingStore.getWorkspaceSettingByKey(WorkspaceSettingKey.GENERAL).generalSetting?.customProfile?.domain;
 
   // Prepare memo.
   useEffect(() => {
@@ -62,7 +64,9 @@ const MemoEmbed = () => {
                 </span>
               </div>
             </div>
-            <span className="text-gray-500 text-end max-sm:text-sm dark:text-gray-400">via {window.location.origin}</span>
+            <span className="text-gray-500 text-end max-sm:text-sm dark:text-gray-400">
+              via {domain && domain !== "" ? domain : window.location.hostname}
+            </span>
           </div>
         </div>
       )}

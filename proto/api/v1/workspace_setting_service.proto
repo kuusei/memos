@@ -50,6 +50,7 @@ message WorkspaceCustomProfile {
   string logo_url = 3;
   string locale = 4;
   string appearance = 5;
+  string domain = 6;
 }
 
 message WorkspaceStorageSetting {

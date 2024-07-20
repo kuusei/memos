@@ -4,8 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { getDateTimeString } from "@/helpers/datetime";
 import useLoading from "@/hooks/useLoading";
-import { useUserStore } from "@/store/v1";
+import { useUserStore, useWorkspaceSettingStore } from "@/store/v1";
 import { Memo } from "@/types/proto/api/v1/memo_service";
+import { WorkspaceSettingKey } from "@/types/proto/store/workspace_setting";
 import toImage from "@/utils/html2image";
 import { useTranslate } from "@/utils/i18n";
 import { generateDialog } from "./Dialog";
@@ -31,6 +32,8 @@ const ShareMemoDialog: React.FC<Props> = (props: Props) => {
     ...propsMemo,
     displayTsStr: getDateTimeString(propsMemo.displayTime),
   };
+  const workspaceSettingStore = useWorkspaceSettingStore();
+  const domain = workspaceSettingStore.getWorkspaceSettingByKey(WorkspaceSettingKey.GENERAL).generalSetting?.customProfile?.domain;
 
   // Initial related data: creator.
   useEffect(() => {
@@ -121,7 +124,9 @@ const ShareMemoDialog: React.FC<Props> = (props: Props) => {
                   </span>
                 </div>
               </div>
-              <span className="text-gray-500 text-end max-sm:text-sm dark:text-gray-400">via {window.location.origin}</span>
+              <span className="text-gray-500 text-end max-sm:text-sm dark:text-gray-400">
+                via {domain && domain !== "" ? domain : window.location.hostname}
+              </span>
             </div>
           </div>
         </div>

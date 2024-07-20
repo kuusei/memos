@@ -2143,6 +2143,8 @@ definitions:
         type: string
       appearance:
         type: string
+      domain:
+        type: string
   apiv1WorkspaceGeneralSetting:
     type: object
     properties:

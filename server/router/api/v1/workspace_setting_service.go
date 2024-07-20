@@ -142,6 +142,7 @@ func convertWorkspaceGeneralSettingFromStore(setting *storepb.WorkspaceGeneralSe
 			LogoUrl:     setting.CustomProfile.LogoUrl,
 			Locale:      setting.CustomProfile.Locale,
 			Appearance:  setting.CustomProfile.Appearance,
+			Domain:      setting.CustomProfile.Domain,
 		}
 	}
 	return generalSetting
@@ -162,6 +163,7 @@ func convertWorkspaceGeneralSettingToStore(setting *v1pb.WorkspaceGeneralSetting
 			LogoUrl:     setting.CustomProfile.LogoUrl,
 			Locale:      setting.CustomProfile.Locale,
 			Appearance:  setting.CustomProfile.Appearance,
+			Domain:      setting.CustomProfile.Domain,
 		}
 	}
 	return generalSetting

@@ -290,7 +290,8 @@
         "description": "描述",
         "icon-url": "图标 URL",
         "locale": "服务器语言环境",
-        "title": "自定义服务"
+        "title": "自定义服务",
+        "domain": "域名"
       },
       "disable-password-login": "禁用密码登录",
       "disable-password-login-final-warning": "如果您知道自己在做什么，请输入 \"CONFIRM\"。",

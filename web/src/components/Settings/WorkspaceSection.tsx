@@ -1,5 +1,5 @@
 import { Button, Textarea } from "@mui/joy";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { workspaceSettingServiceClient } from "@/grpcweb";
@@ -16,6 +16,14 @@ const WorkspaceSection = () => {
   const [workspaceGeneralSetting, setWorkspaceGeneralSetting] = useState<WorkspaceGeneralSetting>(
     WorkspaceGeneralSetting.fromPartial(workspaceSettingStore.getWorkspaceSettingByKey(WorkspaceSettingKey.GENERAL)?.generalSetting || {}),
   );
+
+  useEffect(() => {
+    setWorkspaceGeneralSetting(
+      WorkspaceGeneralSetting.fromPartial(
+        workspaceSettingStore.getWorkspaceSettingByKey(WorkspaceSettingKey.GENERAL)?.generalSetting || {},
+      ),
+    );
+  }, [workspaceSettingStore]);
 
   const handleUpdateCustomizedProfileButtonClick = () => {
     showUpdateCustomizedProfileDialog();
@@ -63,13 +71,29 @@ const WorkspaceSection = () => {
 
   return (
     <div className="w-full flex flex-col gap-2 pt-2 pb-4">
-      <p className="font-medium text-gray-700 dark:text-gray-500">{t("common.basic")}</p>
-      <div className="w-full flex flex-row justify-between items-center">
+      <p className="w-full font-medium relative text-gray-700 dark:text-gray-500">
+        {t("common.basic")}{" "}
+        <Button className="!absolute ml-auto right-0" onClick={handleUpdateCustomizedProfileButtonClick}>
+          {t("common.edit")}
+        </Button>
+      </p>
+      <div className="w-full flex flex-col justify-between">
         <div>
           {t("setting.system-section.server-name")}:{" "}
           <span className="font-mono font-bold">{workspaceGeneralSetting.customProfile?.title || "Memos"}</span>
         </div>
-        <Button onClick={handleUpdateCustomizedProfileButtonClick}>{t("common.edit")}</Button>
+        {workspaceGeneralSetting.customProfile?.domain && (
+          <div>
+            {t("setting.system-section.customize-server.domain")}:{" "}
+            <span className="font-mono font-bold">{workspaceGeneralSetting.customProfile?.domain || ""}</span>
+          </div>
+        )}
+        {workspaceGeneralSetting.customProfile?.description && (
+          <div>
+            {t("setting.system-section.customize-server.description")}:{" "}
+            <span className="font-mono font-bold">{workspaceGeneralSetting.customProfile?.description || ""}</span>
+          </div>
+        )}
       </div>
       <p className="font-medium text-gray-700 dark:text-gray-500">General</p>
       <div className="space-y-2 border rounded-md py-2 px-3 dark:border-zinc-700">
