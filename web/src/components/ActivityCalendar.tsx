@@ -1,13 +1,17 @@
 import { Tooltip } from "@mui/joy";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { memoServiceClient } from "@/grpcweb";
+import { useState } from "react";
 import { DAILY_TIMESTAMP } from "@/helpers/consts";
 import { getNormalizedDateString } from "@/helpers/datetime";
-import useCurrentUser from "@/hooks/useCurrentUser";
-import { useFilterStore } from "@/store/module";
-import { useMemoList } from "@/store/v1";
 import { Translations, useTranslate } from "@/utils/i18n";
+
+interface Props {
+  // Format: 2021-1
+  month: string;
+  selectedDate?: string;
+  data: Record<string, number>;
+  onClick?: (date: string) => void;
+}
 
 const tableConfig = {
   width: 9,
@@ -37,27 +41,13 @@ const getCellAdditionalStyles = (count: number, maxCount: number) => {
   }
 };
 
-const ActivityCalendar = () => {
+const ActivityCalendar = (props: Props) => {
   const t = useTranslate();
-  const filterStore = useFilterStore();
+
+  const { data, onClick } = props;
   // data
-  const user = useCurrentUser();
-  const memoList = useMemoList();
-  const [activityStats, setActivityStats] = useState<Record<string, number>>({});
-  useEffect(() => {
-    (async () => {
-      const filters = [`row_status == "NORMAL"`];
-      const { stats } = await memoServiceClient.getUserMemosStats({
-        name: user.name,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        filter: filters.join(" && "),
-      });
-      setActivityStats(stats);
-    })();
-  }, [memoList.value.length]);
-  const maxCount = Math.max(...Object.values(activityStats));
+  const maxCount = Math.max(...Object.values(data));
   // time
-  const [selectedDateString, setSelectedDateString] = useState<string | undefined>(filterStore.state.selectedDateString);
   const todayTimeStamp = new Date().getTime();
   const weekDay = new Date(todayTimeStamp).getDay();
   const dayTips = ["mon", "", "wed", "", "fri", "", "sun"];
@@ -71,10 +61,10 @@ const ActivityCalendar = () => {
     <div className={clsx("w-fit h-auto mt-2 p-0.5 shrink-0 grid grid-flow-col grid-rows-7 grid-cols-10 gap-[3px]")}>
       {[...days, ...nullCell].map((day, index) => {
         const date = getNormalizedDateString(day);
-        const count = activityStats[date] || 0;
+        const count = data[date] || 0;
         const isToday = new Date().toDateString() === new Date(date).toDateString();
         const tooltipText = count ? t("memo.count-memos-in-date", { count: count, date: date }) : date;
-        const isSelected = selectedDateString ? new Date(selectedDateString).toDateString() === new Date(date).toDateString() : false;
+        const isSelected = !!props.selectedDate && new Date(props.selectedDate).toDateString() === new Date(date).toDateString();
         return day && day !== 0 ? (
           <Tooltip className="shrink-0" key={`${date}-${index}`} title={tooltipText} placement="top" arrow>
             <div
@@ -86,17 +76,7 @@ const ActivityCalendar = () => {
                 !isToday && !isSelected && "border-transparent",
                 count > 0 ? "cursor-pointer" : "cursor-default",
               )}
-              onClick={() => {
-                if (count > 0) {
-                  if (!selectedDateString || !isSelected) {
-                    setSelectedDateString(date);
-                    filterStore.setSelectedDateString(date);
-                  } else {
-                    setSelectedDateString(undefined);
-                    filterStore.setSelectedDateString(undefined);
-                  }
-                }
-              }}
+              onClick={() => count && onClick && onClick(new Date(date).toDateString())}
             ></div>
           </Tooltip>
         ) : (
