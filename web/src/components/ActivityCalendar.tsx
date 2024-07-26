@@ -68,13 +68,13 @@ const ActivityCalendar = (props: Props) => {
         return day && day !== 0 ? (
           <Tooltip className="shrink-0" key={`${date}-${index}`} title={tooltipText} placement="top" arrow>
             <div
+              key={`${date}-${index}`}
               className={clsx(
                 "w-4 h-4 rounded-sm flex justify-center items-center border",
                 getCellAdditionalStyles(count, maxCount),
                 isToday && "border-gray-400 dark:border-zinc-300",
                 isSelected && "!border-gray-900 dark:border-zinc-300",
                 !isToday && !isSelected && "border-transparent",
-                count > 0 ? "cursor-pointer" : "cursor-default",
               )}
               onClick={() => count && onClick && onClick(new Date(date).toDateString())}
             ></div>
